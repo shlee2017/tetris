@@ -59,6 +59,8 @@ function getNewPiece(){
     }
 }
 
+curP.drawPiece();
+curP.erasePiece();
 curP.y = curP.y + 1;
 curP.drawPiece();
 //curP.drop();
