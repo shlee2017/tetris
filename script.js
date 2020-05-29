@@ -59,4 +59,6 @@ function getNewPiece(){
     }
 }
 
+curP.y = curP.y + 1;
 curP.drawPiece();
+//curP.drop();

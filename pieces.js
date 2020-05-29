@@ -2,6 +2,7 @@ const ROW = 21;
 const COL = 10;
 const BS = 20;  //block size
 const ctx = document.getElementById("game").getContext("2d");
+const speed = 1000;
 
 //empty board
 let board = [];
@@ -184,7 +185,7 @@ function checkCollision(x, y, pattern){
     for(let r = 0; r < pattern.length; ++r){
         for(let c = 0; c < pattern[r].length; ++c){
             if(pattern[r][c]){
-                if(board[this.y + r][this.x + c] != "black"){
+                if(board[y + r][x + c] != "black"){
                     return true;
                 }
             }
@@ -210,6 +211,7 @@ class Piece{
                 }
             }
         }
+        checkCollision(this.x, this.y, this.pattern);
     }
     erasePiece(){
         for(let r = 0; r < 3; ++r){
@@ -224,19 +226,40 @@ class Piece{
     stop(){
         //TODO
     }
+
     moveLeft(){
         if(!checkCollision(this.x-1, this.y, this.pattern)){
+            this.erasePiece();
             this.x = this.x - 1;
+            this.drawPiece();
         }
     }
     moveRight(){
         if(!checkCollision(this.x+1, this.y, this.pattern)){
+            this.erasePiece();
             this.x = this.x + 1;
+            this.drawPiece();
         }
     }
-    moveDown(){
+    softDrop(){
         if(!checkCollision(this.x, this.y+1, this.pattern)){
+            this.erasePiece();
             this.y = this.y + 1;
+            this.drawPiece();
+        }
+    }
+    hardDrop(){
+        //TODO
+    }
+
+    drop(){
+        if(!checkCollision(this.x, this.y+1, this.pattern)){
+            this.erasePiece();
+            this.y = this.y + 1;
+            this.drawPiece();
+        }
+        else{
+            clearInterval(this.dropInt);
         }
     }
 }
