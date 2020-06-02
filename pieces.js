@@ -249,7 +249,17 @@ class Piece{
         }
     }
     hardDrop(){
-        //TODO
+		//TODO
+		let bot = this.y;
+		//I think it is better from bottom up???
+		for(let i = ROW-1; i >= this.y; --i){
+			for(let j = this.x; j < this.x+this.pattern[0].length; ++j){
+				if(board[i][j] != "black"){
+					bot = i+1;
+					break;
+				}
+			}
+		}
     }
 
     drop(){
