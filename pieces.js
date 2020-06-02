@@ -201,7 +201,7 @@ class Piece{
         this.pattern = squares[0];
         this.num = 0;
         this.x = 3;
-        this.y = 0;
+		this.y = 0;
     }
     drawPiece(){
         for(let r = 0; r < this.pattern.length; ++r){
@@ -251,15 +251,22 @@ class Piece{
     hardDrop(){
 		//TODO
 		let bot = this.y;
-		//I think it is better from bottom up???
-		for(let i = ROW-1; i >= this.y; --i){
+		for(let i = this.y; i < ROW; ++i){
+			let temp = true;
 			for(let j = this.x; j < this.x+this.pattern[0].length; ++j){
 				if(board[i][j] != "black"){
-					bot = i+1;
+					temp = false;
 					break;
 				}
 			}
+			if(temp){
+				bot = i;
+			}
+			else{
+				break;
+			}
 		}
+		this.y = bot;
     }
 
     drop(){
