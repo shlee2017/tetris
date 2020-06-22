@@ -1,7 +1,6 @@
 function drawSquare(r, c, color){
     ctx.fillStyle = color;
     ctx.fillRect(c*BS, r*BS, BS, BS);
-
     ctx.strokeStyle = "gray";
     ctx.strokeRect(c*BS, r*BS, BS, BS);
 }
@@ -60,7 +59,19 @@ function getNewPiece(){
 }
 
 curP.drawPiece();
-curP.erasePiece();
+/*curP.erasePiece();
 curP.y = curP.y + 1;
-curP.drawPiece();
+curP.drawPiece();*/
 //curP.drop();
+
+//assign functions to keyCodes
+function control(e) {
+    if(e.keyCode === 37) {
+        curP.moveLeft();
+    } else if (e.keyCode === 39) {
+        curP.moveRight();
+    } else if (e.keyCode === 40) {
+        curP.softDrop();
+    }
+}
+document.addEventListener('keyup', control);
